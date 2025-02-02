@@ -1,0 +1,88 @@
+/* src/components/About/About.css */
+.about {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center; /* This centers items vertically */
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center; /* This helps with vertical centering */
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    color: #1A1A1A;
+    margin: 0; /* Remove margin to help with centering */
+    text-align: left;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4A4A4A;
+    margin: 0; /* Remove default margins */
+}
+
+.about-image {
+    text-align: right;
+    display: flex;
+    align-items: center; /* This centers the image vertically */
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: #2563EB;
+    font-size: 2rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #1D4ED8;
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+
+    .about h2 {
+    font-size: 2rem;
+    }
+
+    .about-text p {
+    font-size: 1rem;
+    }
+
+    .about-image {
+    text-align: center;
+    }
+}
