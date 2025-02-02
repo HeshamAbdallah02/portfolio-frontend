@@ -5,7 +5,7 @@
 }
 
 section {
-  padding: 4rem 0; /* Remove horizontal padding */
+  padding-top: 4rem; /* Remove horizontal padding */
   max-width: 100%; /* Allow full width */
   margin: 0; /* Remove margins */
 }
