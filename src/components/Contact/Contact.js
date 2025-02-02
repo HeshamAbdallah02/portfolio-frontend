@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import './Contact.css';
@@ -10,6 +10,23 @@ function Contact({ profile }) {
     email: '',
     message: ''
   });
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isPersistentSuccess, setIsPersistentSuccess] = useState(false);
+
+  // Check for existing success state on component mount
+  useEffect(() => {
+    const savedSuccess = localStorage.getItem('contactSuccess');
+    if (savedSuccess) {
+      setShowSuccess(true);
+      setIsPersistentSuccess(true);
+      const timer = setTimeout(() => {
+        localStorage.removeItem('contactSuccess');
+        setShowSuccess(false);
+        setIsPersistentSuccess(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const validateForm = (formData) => {
     const newErrors = {};
@@ -54,6 +71,10 @@ function Contact({ profile }) {
       });
 
       if (response.status === 200) {
+        // Save to localStorage for persistence
+        localStorage.setItem('contactSuccess', 'true');
+        setShowSuccess(true);
+        
         Swal.fire({
           title: "Message Sent!",
           text: "Thank you for reaching out. I'll respond soon!",
@@ -61,7 +82,14 @@ function Contact({ profile }) {
           confirmButtonColor: "#3085d6",
           confirmButtonText: "OK"
         });
+        
         e.target.reset();
+        
+        // Auto-clear after 5 seconds
+        setTimeout(() => {
+          localStorage.removeItem('contactSuccess');
+          setShowSuccess(false);
+        }, 5000);
       }
     } catch (error) {
       let errorMessage = "Message failed to send. Please try again later.";
@@ -87,6 +115,14 @@ function Contact({ profile }) {
   return (
     <div className="contact" id="contact">
       <h2>{profile.contact?.title || "Get In Touch"}</h2>
+      
+      {/* Persistent Success Message */}
+      {(showSuccess || isPersistentSuccess) && (
+        <div className="success-message">
+          <p>✓ Message sent successfully!</p>
+        </div>
+      )}
+
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <input 
