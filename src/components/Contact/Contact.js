@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import API_BASE_URL from '../config/api.config';
+import API_BASE_URL from '../../config/api.config';
 import './Contact.css';
 
 function Contact({ profile }) {
