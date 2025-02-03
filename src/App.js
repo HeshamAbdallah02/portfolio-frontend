@@ -8,6 +8,7 @@ import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import axios from 'axios';
+import API_BASE_URL from './config/api.config';
 import './App.css';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/profile');
+        const response = await axios.get(`${API_BASE_URL}/api/profile`);
         setProfile(response.data);
         
         // Set theme variables
