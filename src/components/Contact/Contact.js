@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import API_BASE_URL from '../config/api.config';
 import './Contact.css';
 
 function Contact({ profile }) {
@@ -65,7 +66,7 @@ function Contact({ profile }) {
     }
 
     try {
-      const response = await axios.post('/api/contact', formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/contact`, formData, {
         timeout: 10000,
         headers: { 'Content-Type': 'application/json' }
       });
