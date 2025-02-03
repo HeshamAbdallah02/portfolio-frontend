@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+# Personal Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive portfolio website built with the MERN stack (MongoDB, Express.js, React.js, Node.js) showcasing my projects and skills.
 
-## Available Scripts
+## 🌟 Live Demo
 
-In the project directory, you can run:
+- Frontend: [View Live Site](https://portfolio-frontend-delta-eight.vercel.app)
+- Backend API: [API Endpoint](https://portfolio-backend-helgxq.fly.dev)
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Responsive Design**: Fully responsive layout ensuring perfect display across all devices
+- **Dynamic Content**: Content management through MongoDB database
+- **Modern UI/UX**: Clean and professional interface with smooth animations
+- **Contact Form**: Integrated email functionality using Nodemailer
+- **Project Showcase**: Dynamic project display with filtering capabilities
+- **Skills Section**: Organized display of technical and soft skills
+- **Interactive Elements**: Smooth scrolling, animations, and interactive components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠 Tech Stack
 
-### `npm test`
+### Frontend
+- React.js
+- CSS3 with modern features
+- Axios for API requests
+- SweetAlert2 for notifications
+- Font Awesome icons
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Backend
+- Node.js
+- Express.js
+- MongoDB with Mongoose
+- Nodemailer for email functionality
+- CORS for secure cross-origin requests
+- Express Rate Limit for API protection
 
 ### Deployment
+- Frontend: Vercel
+- Backend: Fly.io
+- Database: MongoDB Atlas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🚀 Quick Start
 
-### `npm run build` fails to minify
+### Prerequisites
+- Node.js (v18 or higher)
+- MongoDB
+- npm or yarn
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Frontend Setup
+```bash
+# Clone the frontend repository
+git clone https://github.com/HeshamAbdallah02/portfolio-frontend.git
+
+# Navigate to frontend directory
+cd portfolio-frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+
+
+### Backend Setup
+
+# Clone the backend repository
+git clone https://github.com/HeshamAbdallah02/portfolio-backend.git
+
+# Navigate to backend directory
+cd portfolio-backend
+
+# Install dependencies
+npm install
+
+# Create .env file and add your variables
+cp .env.example .env
+
+# Start server
+npm start
+
+
+📁 Project Structure
+### Frontend
+portfolio-frontend/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Header/
+│   │   ├── Hero/
+│   │   ├── About/
+│   │   ├── Skills/
+│   │   ├── Projects/
+│   │   ├── Contact/
+│   │   └── Footer/
+│   ├── config/
+│   ├── assets/
+│   └── styles/
+
+### Backend
+portfolio-backend/
+├── src/
+│   ├── config/
+│   ├── models/
+│   ├── routes/
+│   └── middleware/
+├── public/
+└── server.js
+
+
+⚙️ Environment Variables
+### Frontend
+REACT_APP_API_BASE_URL=your_backend_url
+
+### Backend
+MONGODB_URI=your_mongodb_uri
+PORT=5000
+EMAIL_USER=your_email
+EMAIL_PASS=your_email_password
+RECEIVER_EMAIL=your_receiver_email
+
+📝 API Endpoints
+GET /api/profile: Fetch profile information
+GET /api/projects: Fetch all projects
+GET /api/skills: Fetch skills information
+POST /api/contact: Send contact form message
+🔒 Security Features
+CORS configuration
+Rate limiting
+Environment variables
+Input validation
+Error handling
+🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check issues page.
+
+📜 License
+This project is MIT licensed.
+
+👤 Contact
+Hesham Abdallah
+
+LinkedIn: Hesham Abdallah
+GitHub: @HeshamAbdallah02
