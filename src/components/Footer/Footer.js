@@ -14,7 +14,7 @@ function Footer({ profile }) {
                     behavior: 'smooth',
                     block: 'start'
                 });
-            } 
+            }
             // Older browsers
             else {
                 const offset = 100; // Adjust based on header height
@@ -22,13 +22,13 @@ function Footer({ profile }) {
                 const elementRect = target.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
                 const offsetPosition = elementPosition - offset;
-                
+
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'auto'
                 });
             }
-            
+
             window.history.pushState(null, null, `#${section}`);
         }
     };
@@ -36,7 +36,7 @@ function Footer({ profile }) {
     // Only load polyfill if needed
     useEffect(() => {
         if ('scrollBehavior' in document.documentElement.style) return;
-        
+
         import('smoothscroll-polyfill').then(module => {
             module.polyfill();
         }).catch(error => {
@@ -51,11 +51,11 @@ function Footer({ profile }) {
                     <h3 className="name">{profile.name}</h3>
                     <div className="social-icons">
                         {profile.footer?.socialIcons?.map((icon) => (
-                            <a key={icon} 
-                               href={profile.socialLinks[icon]} 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               className="social-link">
+                            <a key={icon}
+                                href={profile.socialLinks[icon]}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="social-link">
                                 <i className={`fab fa-${icon}`} />
                             </a>
                         ))}
@@ -64,11 +64,11 @@ function Footer({ profile }) {
 
                 <div className="right-content">
                     <nav className="footer-nav">
-                        {profile.footer?.navigation?.map((section) => (
-                            <a key={section} 
-                               href={`#${section}`}
-                               onClick={(e) => handleScroll(e, section)}
-                               className="nav-link">
+                        {['home', 'work', 'about', 'experience', 'contact'].map((section) => (
+                            <a key={section}
+                                href={`#${section}`}
+                                onClick={(e) => handleScroll(e, section)}
+                                className="nav-link">
                                 {section.charAt(0).toUpperCase() + section.slice(1)}
                             </a>
                         ))}

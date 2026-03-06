@@ -1,12 +1,25 @@
+/* ===== FOOTER — Polished Finale ===== */
+
 .footer {
-    background-color: #1A1A1A;
-    color: white;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     padding: 4rem 2rem 2rem;
     position: relative;
 }
 
+/* Gradient top border */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-main);
+}
+
 .footer-content {
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -14,35 +27,53 @@
     padding-bottom: 2rem;
 }
 
-/* Left Content */
+/* — Left Content — */
 .left-content {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .name {
     margin: 0;
+    font-family: var(--font-heading);
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .social-icons {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .social-icons a {
-    color: white;
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    transition: all 0.3s var(--ease-out-expo);
+    text-decoration: none;
 }
 
 .social-icons a:hover {
-    color: #2563EB;
+    color: var(--accent-purple);
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.15);
 }
 
-/* Right Content */
+/* — Right Content — */
 .right-content {
     display: flex;
     flex-direction: column;
@@ -55,71 +86,46 @@
 }
 
 .footer-nav a {
-    color: white;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
     text-decoration: none;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
     text-transform: capitalize;
-}
-
-.footer-nav a:hover {
-    color: #2563EB;
-}
-
-/* Add these new rules */
-.nav-link {
     position: relative;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.3s ease;
 }
 
-.nav-link::after {
+.footer-nav a::after {
     content: '';
     position: absolute;
     bottom: -4px;
     left: 0;
     width: 0;
     height: 2px;
-    background: #2563EB;
-    transition: width 0.3s ease;
+    background: var(--gradient-main);
+    border-radius: 2px;
+    transition: width 0.3s var(--ease-out-expo);
 }
 
-.nav-link:hover::after {
+.footer-nav a:hover {
+    color: var(--text-primary);
+}
+
+.footer-nav a:hover::after {
     width: 100%;
 }
 
-.nav-link:hover {
-    transform: translateY(-2px);
-}
-
-.social-link {
-    transition: transform 0.3s ease;
-}
-
-.social-link:hover {
-    transform: translateY(-3px) scale(1.1);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    html {
-        scroll-behavior: smooth;
-    }
-    
-    .nav-link {
-        scroll-margin-top: 100px; /* Adjust based on header height */
-    }
-}
-
-/* Copyright */
+/* — Copyright — */
 .copyright {
     text-align: center;
-    color: #888;
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive Design */
+/* — Responsive — */
 @media (max-width: 768px) {
     .footer-content {
         flex-direction: column;
@@ -139,10 +145,18 @@
     .footer-nav {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 1.5rem;
     }
 
     .copyright {
         margin-top: 2rem;
         padding-top: 1.5rem;
+    }
+}
+
+/* Smooth scroll for nav links */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
     }
 }

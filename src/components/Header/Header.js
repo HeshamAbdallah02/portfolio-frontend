@@ -4,6 +4,7 @@ import './Header.css';
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   // Handle scroll effect
   useEffect(() => {
@@ -13,6 +14,24 @@ function Header() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Active section tracking with IntersectionObserver
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => sections.forEach((section) => observer.unobserve(section));
   }, []);
 
   // Close menu when clicking outside
@@ -32,13 +51,25 @@ function Header() {
     setIsMenuOpen(false);
   };
 
+  const navLinks = [
+    { id: 'home', label: 'Home' },
+    { id: 'work', label: 'Work' },
+    { id: 'about', label: 'About' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'contact', label: 'Contact' }
+  ];
+
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="header-content">
-        <div className="logo">Hesham Abdallah</div>
-        
+        <a href="#home" className="logo">
+          <span className="logo-bracket">&lt;</span>
+          <span className="logo-text">HA</span>
+          <span className="logo-bracket">/&gt;</span>
+        </a>
+
         {/* Hamburger Menu Button */}
-        <button 
+        <button
           className={`hamburger ${isMenuOpen ? 'active' : ''}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
@@ -50,11 +81,16 @@ function Header() {
 
         {/* Navigation Menu */}
         <nav className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-          <a href="#home" onClick={handleNavClick}>Home</a>
-          <a href="#about" onClick={handleNavClick}>About</a>
-          <a href="#skills" onClick={handleNavClick}>Skills</a>
-          <a href="#projects" onClick={handleNavClick}>Projects</a>
-          <a href="#contact" onClick={handleNavClick}>Contact</a>
+          {navLinks.map(({ id, label }) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              onClick={handleNavClick}
+              className={activeSection === id ? 'active' : ''}
+            >
+              {label}
+            </a>
+          ))}
         </nav>
       </div>
     </header>

@@ -1,86 +1,161 @@
+/* ===== CONTACT — Immersive Form ===== */
+
 .contact {
-    padding: 4rem 0;
-    background-color: #f0f0f0;
-    text-align: center;
+    padding: var(--section-padding);
+    background: var(--bg-primary);
 }
 
-.contact-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.contact h2 {
-    font-size: 2.5rem;
-    color: #1A1A1A;
-    margin-bottom: 2rem;
-}
-
-.contact-form {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.contact-container {
     max-width: 600px;
     margin: 0 auto;
+    padding: var(--container-padding);
 }
 
+/* — Form Card — */
+.contact-form {
+    background: var(--bg-card);
+    border: var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.contact-form::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: var(--gradient-card-border);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* — Floating Label Groups — */
 .form-group {
+    position: relative;
     margin-bottom: 1.5rem;
-    text-align: left;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #e9ecef;
-    border-radius: 6px;
+    padding: 1rem 1rem 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    font-family: var(--font-body);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.form-group textarea~label {
+    top: 1rem;
+    transform: none;
+}
+
+/* Float label on focus or when input has content */
+.form-group input:focus~label,
+.form-group input:not(:placeholder-shown)~label {
+    top: -0.5rem;
+    left: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--accent-purple);
+    background: var(--bg-tertiary);
+    padding: 0 0.3rem;
+}
+
+.form-group textarea:focus~label,
+.form-group textarea:not(:placeholder-shown)~label {
+    top: -0.5rem;
+    left: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--accent-purple);
+    background: var(--bg-tertiary);
+    padding: 0 0.3rem;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none;
-    border-color: #2563EB;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+    border-color: rgba(139, 92, 246, 0.4);
+    background: rgba(139, 92, 246, 0.03);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.08);
 }
 
 .form-group textarea {
     resize: vertical;
+    min-height: 120px;
 }
 
+/* — Error — */
+.invalid {
+    border-color: #ef4444 !important;
+}
+
+.error-text {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    display: block;
+    padding-left: 0.5rem;
+}
+
+/* — Send Button — */
 .send-btn {
-    background-color: #2563EB;
-    color: white;
     width: 100%;
-    padding: 0.75rem;
+    padding: 1rem;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
+    font-family: var(--font-body);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    background: var(--gradient-main);
+    color: white;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
+    transition: all 0.3s var(--ease-out-expo);
 }
 
-/* Error styling */
-.invalid {
-    border-color: #dc3545 !important;
+.send-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.35);
 }
 
-.error-text {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: block;
+.send-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
-/* Loading spinner */
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.send-btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* — Spinner — */
 .spinner {
     display: inline-block;
     width: 1rem;
@@ -88,53 +163,34 @@
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 0.5rem;
+    animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-/* Disabled button */
-.send-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.send-btn:hover {
-    background-color: #1d4ed8;
-}
-
-/* Success message */
+/* — Success Message — */
 .success-message {
-    background: #d4edda;
-    color: #155724;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
     padding: 1rem;
-    border-radius: 4px;
-    margin: 1rem auto;
-    max-width: 600px;
-    animation: fadeIn 0.3s ease-in;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .success-message p {
     margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-weight: 500;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
+/* — Responsive — */
 @media (max-width: 768px) {
     .contact-form {
         padding: 1.5rem;
-    }
-    
-    .contact h2 {
-        font-size: 2rem;
     }
 }

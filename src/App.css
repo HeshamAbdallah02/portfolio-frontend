@@ -1,11 +1,114 @@
 /* src/App.css */
 .App {
-  padding-top: 0; /* Remove top padding */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  padding-top: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: var(--bg-primary);
 }
 
 section {
-  padding-top: 4rem; /* Remove horizontal padding */
-  max-width: 100%; /* Allow full width */
-  margin: 0; /* Remove margins */
+  position: relative;
+}
+
+/* ===== PREMIUM LOADING SCREEN ===== */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  z-index: 9999;
+  gap: 2rem;
+}
+
+.loading-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--gradient-main);
+  color: white;
+  animation: loadingPulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.loading-logo::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 22px;
+  background: var(--gradient-main);
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(15px);
+  animation: loadingGlow 2s ease-in-out infinite;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid rgba(139, 92, 246, 0.15);
+  border-top-color: var(--accent-purple);
+  animation: loadingSpin 0.8s linear infinite;
+}
+
+.loading-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: loadingFade 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes loadingGlow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: blur(15px);
+  }
+
+  50% {
+    opacity: 0.6;
+    filter: blur(25px);
+  }
+}
+
+@keyframes loadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingFade {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }

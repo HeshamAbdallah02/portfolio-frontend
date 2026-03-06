@@ -1,0 +1,186 @@
+/* ===== CTA — Call to Action Block ===== */
+
+.cta {
+    padding: 8rem 0;
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* — Background Orbs — */
+.cta-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.cta-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--accent-purple), transparent 70%);
+    top: -150px;
+    left: -100px;
+    animation: orbFloat1 14s ease-in-out infinite;
+}
+
+.cta-orb-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, var(--accent-teal), transparent 70%);
+    bottom: -150px;
+    right: -80px;
+    animation: orbFloat2 12s ease-in-out infinite;
+}
+
+/* — Content — */
+.cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--container-padding);
+    position: relative;
+    z-index: 2;
+}
+
+/* — Label — */
+.cta-label {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-purple);
+    margin-bottom: 1rem;
+}
+
+/* — Heading — */
+.cta-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 1.2rem;
+}
+
+/* — Description — */
+.cta-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* — Social Links Grid — */
+.cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 14px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.35s var(--ease-out-expo);
+}
+
+.cta-link i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-link:hover {
+    transform: translateY(-4px);
+}
+
+.cta-link:hover i {
+    transform: scale(1.15);
+}
+
+/* — Individual Link Colors — */
+.cta-email:hover {
+    border-color: rgba(239, 68, 68, 0.4);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+    background: rgba(239, 68, 68, 0.08);
+}
+
+.cta-email i {
+    color: #ef4444;
+}
+
+.cta-linkedin:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.cta-linkedin i {
+    color: #0a66c2;
+}
+
+.cta-whatsapp:hover {
+    border-color: rgba(37, 211, 102, 0.4);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.15);
+    background: rgba(37, 211, 102, 0.08);
+}
+
+.cta-whatsapp i {
+    color: #25d366;
+}
+
+.cta-github:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.cta-github i {
+    color: #e6edf3;
+}
+
+.cta-telegram:hover {
+    border-color: rgba(38, 165, 227, 0.4);
+    box-shadow: 0 8px 25px rgba(38, 165, 227, 0.15);
+    background: rgba(38, 165, 227, 0.08);
+}
+
+.cta-telegram i {
+    color: #26a5e4;
+}
+
+/* — Responsive — */
+@media (max-width: 640px) {
+    .cta {
+        padding: 5rem 0;
+    }
+
+    .cta-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-link {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}

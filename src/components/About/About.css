@@ -1,88 +1,192 @@
-/* src/components/About/About.css */
+/* ===== ABOUT — Storytelling with Depth ===== */
+
 .about {
-    padding: 4rem 0;
-    background-color: #ffffff;
+    padding: var(--section-padding);
+    background: var(--bg-secondary);
+    position: relative;
 }
 
 .about-content {
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: var(--container-padding);
 }
 
+.about .section-title {
+    margin-bottom: 3.5rem;
+}
+
+/* — Grid Layout — */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    align-items: center; /* This centers items vertically */
+    align-items: center;
+    margin-bottom: 4rem;
 }
 
+/* — Text — */
 .about-text {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    justify-content: center; /* This helps with vertical centering */
-}
-
-.about h2 {
-    font-size: 2.5rem;
-    color: #1A1A1A;
-    margin: 0; /* Remove margin to help with centering */
-    text-align: left;
 }
 
 .about-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #4A4A4A;
-    margin: 0; /* Remove default margins */
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
 }
 
-.about-image {
-    text-align: right;
-    display: flex;
-    align-items: center; /* This centers the image vertically */
-}
-
-.about-image img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
+/* — Social Links — */
 .social-links {
     display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.social-link-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: var(--glass-border);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.social-link-btn:hover {
+    color: var(--accent-purple);
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    transform: translateY(-3px);
+}
+
+/* — Image — */
+.about-image-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.about-image-frame {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 420px;
+    width: 100%;
+}
+
+.about-image-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: var(--gradient-main);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-image-frame img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    display: block;
+}
+
+/* — Stats — */
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    margin-top: 1rem;
 }
 
-.social-links a {
-    color: #2563EB;
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+    background: var(--bg-card);
+    border: var(--glass-border);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.1);
+}
+
+.stat-card i {
+    font-size: 1.5rem;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-number {
+    font-family: var(--font-heading);
     font-size: 2rem;
-    transition: color 0.3s ease;
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
-.social-links a:hover {
-    color: #1D4ED8;
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
+/* — Responsive — */
 @media (max-width: 768px) {
     .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
 
-    .about h2 {
-    font-size: 2rem;
+    .about-text {
+        order: 2;
+        text-align: center;
     }
 
-    .about-text p {
-    font-size: 1rem;
+    .about-image-wrapper {
+        order: 1;
     }
 
-    .about-image {
-    text-align: center;
+    .social-links {
+        justify-content: center;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-stats {
+        grid-template-columns: 1fr;
     }
 }
