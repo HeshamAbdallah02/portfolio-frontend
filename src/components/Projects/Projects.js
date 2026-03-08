@@ -3,65 +3,157 @@ import { motion } from 'framer-motion';
 import './Projects.css';
 
 function Projects({ profile }) {
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-    })
+  const projects = profile.projects?.items || [];
+  const featured = projects[0]; // First project gets the spotlight
+  const rest = projects.slice(1);
+
+  // Storytelling context for each project (keyed by title)
+  const projectStories = {
+    'Personal Portfolio': {
+      role: 'Full-Stack Developer',
+      challenge: 'Build a fully customizable portfolio with an admin dashboard — no templates, no compromises.',
+      outcome: 'A dynamic MERN stack portfolio with real-time content management and premium animations.',
+      emoji: '🎨'
+    },
+    'E7GEZLY Web Dashboard': {
+      role: 'Frontend & Backend Developer',
+      challenge: 'Create a real-time dashboard synced with a mobile app for PlayStation booking management.',
+      outcome: 'A live web dashboard with real-time Firestore synchronization and booking analytics.',
+      emoji: '🎮'
+    },
+    'E7GEZLY App Backend': {
+      role: 'Backend Developer',
+      challenge: 'Design a scalable backend for a mobile app with real-time data and cloud functions.',
+      outcome: 'A production-ready Node.js server powering a published Google Play Store application.',
+      emoji: '⚙️'
+    }
+  };
+
+  const getStory = (title) => projectStories[title] || {
+    role: 'Developer',
+    challenge: 'Solve a real-world problem with clean, modern code.',
+    outcome: 'A polished, production-ready application.',
+    emoji: '🚀'
   };
 
   return (
     <div className="projects">
       <div className="projects-content">
-        <h2 className="section-title">
-          <span className="gradient-text">{profile.projects?.title || "Featured Projects"}</span>
-        </h2>
-        <p className="section-subtitle">Some of my recent work</p>
+        <motion.div
+          className="projects-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className="projects-label">My Work</span>
+          <h2 className="section-title">
+            <span className="gradient-text">{profile.projects?.title || "Featured Projects"}</span>
+          </h2>
+          <p className="section-subtitle">Real projects, real problems, real solutions</p>
+        </motion.div>
 
-        <div className="projects-grid">
-          {profile.projects?.items.map((project, index) => (
-            <motion.div
-              key={index}
-              className="project-card"
-              custom={index}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <div className="project-image">
-                <img src={project.image} alt={project.title} />
-                <div className="project-image-overlay">
-                  <div className="overlay-links">
-                    {project.liveLink && (
-                      <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="overlay-btn">
-                        <i className="fas fa-external-link-alt"></i>
-                        Live
-                      </a>
-                    )}
-                    {project.githubLink && (
-                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="overlay-btn">
-                        <i className="fab fa-github"></i>
-                        Code
-                      </a>
-                    )}
+        {/* ---- Featured Project Spotlight ---- */}
+        {featured && (
+          <motion.div
+            className="featured-project"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="featured-image">
+              <img src={featured.image} alt={featured.title} />
+              <div className="featured-badge">
+                <i className="fas fa-star"></i> Featured
+              </div>
+            </div>
+            <div className="featured-info">
+              <span className="featured-role">
+                <i className="fas fa-user-tie"></i> {getStory(featured.title).role}
+              </span>
+              <h3>{featured.title}</h3>
+
+              <div className="story-block">
+                <div className="story-item">
+                  <span className="story-label">The Challenge</span>
+                  <p>{getStory(featured.title).challenge}</p>
+                </div>
+                <div className="story-item">
+                  <span className="story-label">The Outcome</span>
+                  <p>{getStory(featured.title).outcome}</p>
+                </div>
+              </div>
+
+              <div className="featured-tech">
+                {featured.technologies.map((tech, i) => (
+                  <span key={i} className="tech-tag">{tech}</span>
+                ))}
+              </div>
+
+              <div className="featured-actions">
+                {featured.liveLink && (
+                  <a href={featured.liveLink} target="_blank" rel="noopener noreferrer" className="action-btn action-primary">
+                    <i className="fas fa-external-link-alt"></i>
+                    View Live
+                  </a>
+                )}
+                {featured.githubLink && (
+                  <a href={featured.githubLink} target="_blank" rel="noopener noreferrer" className="action-btn action-secondary">
+                    <i className="fab fa-github"></i>
+                    Source Code
+                  </a>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ---- Other Projects ---- */}
+        {rest.length > 0 && (
+          <div className="other-projects">
+            <h3 className="other-projects-title">Other Projects</h3>
+            <div className="projects-grid">
+              {rest.map((project, index) => (
+                <motion.div
+                  key={index}
+                  className="project-card"
+                  custom={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="card-top">
+                    <span className="card-emoji">{getStory(project.title).emoji}</span>
+                    <div className="card-links">
+                      {project.liveLink && (
+                        <a href={project.liveLink} target="_blank" rel="noopener noreferrer" title="View Live">
+                          <i className="fas fa-external-link-alt"></i>
+                        </a>
+                      )}
+                      {project.githubLink && (
+                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer" title="Source Code">
+                          <i className="fab fa-github"></i>
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="project-info">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="project-tech">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
+                  <h4 className="card-title">{project.title}</h4>
+                  <span className="card-role">{getStory(project.title).role}</span>
+                  <p className="card-desc">{project.description}</p>
+
+                  <div className="card-tech">
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
