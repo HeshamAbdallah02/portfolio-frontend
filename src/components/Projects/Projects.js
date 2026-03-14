@@ -7,35 +7,6 @@ function Projects({ profile }) {
   const featured = projects[0]; // First project gets the spotlight
   const rest = projects.slice(1);
 
-  // Storytelling context for each project (keyed by title)
-  const projectStories = {
-    'Personal Portfolio': {
-      role: 'Full-Stack Developer',
-      challenge: 'Build a fully customizable portfolio with an admin dashboard — no templates, no compromises.',
-      outcome: 'A dynamic MERN stack portfolio with real-time content management and premium animations.',
-      emoji: '🎨'
-    },
-    'E7GEZLY Web Dashboard': {
-      role: 'Frontend & Backend Developer',
-      challenge: 'Create a real-time dashboard synced with a mobile app for PlayStation booking management.',
-      outcome: 'A live web dashboard with real-time Firestore synchronization and booking analytics.',
-      emoji: '🎮'
-    },
-    'E7GEZLY App Backend': {
-      role: 'Backend Developer',
-      challenge: 'Design a scalable backend for a mobile app with real-time data and cloud functions.',
-      outcome: 'A production-ready Node.js server powering a published Google Play Store application.',
-      emoji: '⚙️'
-    }
-  };
-
-  const getStory = (title) => projectStories[title] || {
-    role: 'Developer',
-    challenge: 'Solve a real-world problem with clean, modern code.',
-    outcome: 'A polished, production-ready application.',
-    emoji: '🚀'
-  };
-
   return (
     <div className="projects">
       <div className="projects-content">
@@ -70,18 +41,18 @@ function Projects({ profile }) {
             </div>
             <div className="featured-info">
               <span className="featured-role">
-                <i className="fas fa-user-tie"></i> {getStory(featured.title).role}
+                <i className="fas fa-user-tie"></i> {featured.role || 'Developer'}
               </span>
               <h3>{featured.title}</h3>
 
               <div className="story-block">
                 <div className="story-item">
                   <span className="story-label">The Challenge</span>
-                  <p>{getStory(featured.title).challenge}</p>
+                  <p>{featured.challenge}</p>
                 </div>
                 <div className="story-item">
                   <span className="story-label">The Outcome</span>
-                  <p>{getStory(featured.title).outcome}</p>
+                  <p>{featured.outcome}</p>
                 </div>
               </div>
 
@@ -125,7 +96,7 @@ function Projects({ profile }) {
                   transition={{ delay: index * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="card-top">
-                    <span className="card-emoji">{getStory(project.title).emoji}</span>
+                    <span className="card-emoji">{project.emoji || '🚀'}</span>
                     <div className="card-links">
                       {project.liveLink && (
                         <a href={project.liveLink} target="_blank" rel="noopener noreferrer" title="View Live">
@@ -141,7 +112,7 @@ function Projects({ profile }) {
                   </div>
 
                   <h4 className="card-title">{project.title}</h4>
-                  <span className="card-role">{getStory(project.title).role}</span>
+                  <span className="card-role">{project.role || 'Developer'}</span>
                   <p className="card-desc">{project.description}</p>
 
                   <div className="card-tech">

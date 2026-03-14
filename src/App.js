@@ -1,5 +1,5 @@
 // src/App.js
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
@@ -8,50 +8,24 @@ import AboutSkills from './components/AboutSkills/AboutSkills';
 import Experience from './components/Experience/Experience';
 import CTA from './components/CTA/CTA';
 import Footer from './components/Footer/Footer';
-import axios from 'axios';
-import API_BASE_URL from './config/api.config';
+import profileData from './data/profileData';
 import './App.css';
 
-function App() {
-  const [profile, setProfile] = useState(null);
+// Apply theme colour once at module evaluation time
+if (profileData.theme?.primaryColor) {
+  document.documentElement.style.setProperty('--primary-color', profileData.theme.primaryColor);
+}
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/profile`);
-        setProfile(response.data);
-
-        // Set theme variables
-        if (response.data.theme) {
-          document.documentElement.style.setProperty('--primary-color', response.data.theme.primaryColor);
-        }
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
-  if (!profile) {
-    return (
-      <div className="loading-screen">
-        <div className="loading-logo">H</div>
-        <div className="loading-spinner"></div>
-        <div className="loading-text">Loading</div>
-      </div>
-    );
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
   }
+};
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
-
+function App() {
   return (
     <AnimatePresence>
       <div className="App">
@@ -59,7 +33,7 @@ function App() {
         <main>
           {/* 1. Hero — First impression */}
           <section id="home">
-            <Hero profile={profile} />
+            <Hero profile={profileData} />
           </section>
 
           {/* 2. Work — Lead with impact */}
@@ -70,7 +44,7 @@ function App() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
           >
-            <Projects profile={profile} />
+            <Projects profile={profileData} />
           </motion.section>
 
           {/* 3. About + Skills — Who I am & what I use */}
@@ -81,7 +55,7 @@ function App() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            <AboutSkills profile={profile} />
+            <AboutSkills profile={profileData} />
           </motion.section>
 
           {/* 4. Experience — Timeline journey */}
@@ -92,7 +66,7 @@ function App() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
           >
-            <Experience profile={profile} />
+            <Experience profile={profileData} />
           </motion.section>
 
           {/* 5. CTA — Direct action */}
@@ -103,10 +77,10 @@ function App() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <CTA profile={profile} />
+            <CTA profile={profileData} />
           </motion.section>
 
-          <Footer profile={profile} />
+          <Footer profile={profileData} />
         </main>
       </div>
     </AnimatePresence>
