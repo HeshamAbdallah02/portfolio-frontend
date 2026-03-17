@@ -59,7 +59,7 @@ function AboutSkills({ profile }) {
                     >
                         <div className="as-image-frame">
                             <img
-                                src={profile.about?.imageUrl || "http://localhost:5000/images/profile.jpg"}
+                                src={profile.about?.imageUrl || "/images/profile.jpg"}
                                 alt={profile.name}
                             />
                         </div>

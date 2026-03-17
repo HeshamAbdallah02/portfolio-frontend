@@ -115,7 +115,7 @@ function Hero({ profile }) {
           animate={isVisible ? "visible" : "hidden"}
           transition={{ delay: 1.2 }}
         >
-          <a href="#projects" className="hero-btn hero-btn-primary">
+          <a href="#work" className="hero-btn hero-btn-primary">
             {profile.ctaText || "See My Work"}
             <span className="btn-icon">→</span>
           </a>

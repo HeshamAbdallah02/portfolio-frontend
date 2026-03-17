@@ -37,7 +37,6 @@ const profileData = {
     github: "https://github.com/HeshamAbdallah02",
     linkedin: "https://www.linkedin.com/in/hesham-abdalla-6531841ba",
     whatsapp: "https://wa.me/+201091655373",
-    telegram: "https://t.me/HeshamAbdallah",
   },
 
   // ── Contact ──────────────────────────────────────────────────
@@ -196,7 +195,7 @@ const profileData = {
   // ── Footer ───────────────────────────────────────────────────
   footer: {
     copyrightText: "© {year} {name}. All rights reserved.",
-    socialIcons: ["whatsapp", "linkedin", "telegram"],
+    socialIcons: ["whatsapp", "linkedin"],
   },
 };
 
