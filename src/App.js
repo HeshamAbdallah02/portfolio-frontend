@@ -1,5 +1,5 @@
 // src/App.js
-import { useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
