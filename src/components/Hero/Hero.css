@@ -11,84 +11,85 @@
   padding-top: 80px;
 }
 
+/* — Texture Overlay — */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* — Section Transition Mask — */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25vh;
+  background: linear-gradient(to bottom, transparent, var(--bg-secondary));
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* — Floating Orbs — */
 .hero-orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero-orb-1 {
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   background: radial-gradient(circle, var(--accent-purple), transparent 70%);
-  top: -100px;
+  top: -150px;
   right: -100px;
-  animation: orbFloat1 12s ease-in-out infinite;
+  animation: orbFloat1 18s ease-in-out infinite;
 }
 
 .hero-orb-2 {
-  width: 350px;
-  height: 350px;
+  width: 450px;
+  height: 450px;
   background: radial-gradient(circle, var(--accent-blue), transparent 70%);
-  bottom: -50px;
-  left: -80px;
-  animation: orbFloat2 15s ease-in-out infinite;
+  bottom: -100px;
+  left: -100px;
+  animation: orbFloat2 22s ease-in-out infinite;
 }
 
 .hero-orb-3 {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   background: radial-gradient(circle, var(--accent-teal), transparent 70%);
-  top: 40%;
-  right: 20%;
-  animation: orbFloat3 10s ease-in-out infinite;
+  top: 30%;
+  right: 15%;
+  animation: orbFloat3 15s ease-in-out infinite;
 }
 
 @keyframes orbFloat1 {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(-30px, 40px) scale(1.1);
-  }
-
-  66% {
-    transform: translate(20px, -20px) scale(0.95);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(-50px, 80px) scale(1.1) rotate(10deg); }
+  66% { transform: translate(40px, -40px) scale(0.9) rotate(-5deg); }
 }
 
 @keyframes orbFloat2 {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(40px, -30px) scale(1.05);
-  }
-
-  66% {
-    transform: translate(-20px, 30px) scale(1.1);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(60px, -50px) scale(1.05) rotate(-10deg); }
+  66% { transform: translate(-40px, 60px) scale(1.15) rotate(5deg); }
 }
 
 @keyframes orbFloat3 {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  50% {
-    transform: translate(-40px, -20px) scale(1.15);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-60px, -30px) scale(1.2); }
 }
 
 /* — Content — */
@@ -231,6 +232,71 @@
 
 .hero-btn-primary:hover .btn-icon {
   transform: translateX(4px);
+}
+
+/* — Scroll Indicator — */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 5;
+}
+
+.mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--text-muted);
+  border-radius: 20px;
+  position: relative;
+}
+
+.mouse-wheel {
+  width: 3px;
+  height: 6px;
+  background: var(--accent-purple);
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(15px); opacity: 0; }
+}
+
+/* — Decorative Divider — */
+.hero-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  z-index: 3;
+}
+
+.hero-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px;
+}
+
+.hero-divider .shape-fill {
+  fill: var(--bg-secondary);
 }
 
 /* — Responsive — */

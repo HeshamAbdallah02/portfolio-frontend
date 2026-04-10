@@ -8,6 +8,7 @@ import AboutSkills from './components/AboutSkills/AboutSkills';
 import Experience from './components/Experience/Experience';
 import CTA from './components/CTA/CTA';
 import Footer from './components/Footer/Footer';
+import BackToTop from './components/BackToTop/BackToTop';
 import profileData from './data/profileData';
 import './App.css';
 
@@ -82,6 +83,7 @@ function App() {
 
           <Footer profile={profileData} />
         </main>
+        <BackToTop />
       </div>
     </AnimatePresence>
   );

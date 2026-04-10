@@ -3,13 +3,24 @@ import { motion } from 'framer-motion';
 import './AboutSkills.css';
 
 function AboutSkills({ profile }) {
-    const cardVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: (i) => ({
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
             opacity: 1,
             y: 0,
-            transition: { delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-        })
+            transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+        }
     };
 
     return (
@@ -79,35 +90,48 @@ function AboutSkills({ profile }) {
                         <h3 className="as-subheading">Technologies & tools I work with</h3>
                     </motion.div>
 
-                    <div className="as-skills-grid">
+                    <motion.div 
+                        className="as-skills-grid"
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
                         {profile.skills?.categories.map((category, index) => (
                             <motion.div
                                 key={index}
                                 className="as-skill-card"
-                                custom={index}
-                                variants={cardVariants}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
+                                variants={itemVariants}
                             >
                                 <h4 className="as-card-title">{category.name}</h4>
                                 <div className="as-skill-list">
                                     {category.items.map((skill, skillIndex) => (
-                                        <div key={skillIndex} className="as-skill-item">
+                                        <motion.div 
+                                            key={skillIndex} 
+                                            className="as-skill-item"
+                                            whileHover={{ x: 5 }}
+                                            transition={{ type: 'spring', stiffness: 300 }}
+                                        >
                                             <div className="as-skill-icon">
                                                 <i className={skill.icon}></i>
                                             </div>
                                             <span>{skill.name}</span>
-                                        </div>
+                                        </motion.div>
                                     ))}
                                 </div>
                             </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* ---- Stats ---- */}
-                <div className="as-stats">
+                <motion.div 
+                    className="as-stats"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
                     {[
                         { number: '3+', label: 'Projects Built', icon: 'fas fa-rocket' },
                         { number: '1+', label: 'Year Experience', icon: 'fas fa-calendar-check' },
@@ -117,18 +141,14 @@ function AboutSkills({ profile }) {
                         <motion.div
                             key={index}
                             className="as-stat"
-                            custom={index}
-                            variants={cardVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            variants={itemVariants}
                         >
                             <i className={stat.icon}></i>
                             <span className="as-stat-number">{stat.number}</span>
                             <span className="as-stat-label">{stat.label}</span>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </div>
     );

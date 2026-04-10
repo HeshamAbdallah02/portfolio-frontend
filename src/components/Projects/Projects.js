@@ -30,6 +30,7 @@ function Projects({ profile }) {
             className="featured-project"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -5, transition: { duration: 0.3 } }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
@@ -92,8 +93,13 @@ function Projects({ profile }) {
                   custom={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ 
+                    y: -8, 
+                    transition: { duration: 0.3, ease: 'easeOut' } 
+                  }}
+                  whileTap={{ scale: 0.98 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="card-top">
                     <span className="card-emoji">{project.emoji || '🚀'}</span>
